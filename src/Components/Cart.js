@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
-
   const handleRemove = (product, quantityToRemove) => {
     dispatch(removeItemFromCart(product, quantityToRemove));
   };

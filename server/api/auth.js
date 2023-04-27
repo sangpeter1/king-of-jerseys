@@ -1,23 +1,31 @@
-const express = require('express');
+const express = require("express");
 const app = express.Router();
-const { User } = require('../db');
+const { User } = require("../db");
 
 module.exports = app;
 
-app.post('/', async(req, res, next)=> {
+app.post("/", async (req, res, next) => {
   try {
     res.send(await User.authenticate(req.body));
-  }
-  catch(ex){
+  } catch (ex) {
     next(ex);
   }
 });
 
-app.get('/', async(req, res, next)=> {
+app.put("/:token", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.params.token);
+    await user.update(req.body);
+    res.send(user);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.get("/", async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization));
-  }
-  catch(ex){
+  } catch (ex) {
     next(ex);
   }
 });

@@ -7,6 +7,7 @@ const products = (state = [], action) => {
   return state;
 };
 
+
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {

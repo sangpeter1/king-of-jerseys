@@ -3,8 +3,10 @@ import Home from "./Home";
 import Login from "./Login";
 import Cart from "./Cart";
 import PastOrders from "./PastOrders";
+import Profile from "./Profile";
 import { useSelector, useDispatch } from "react-redux";
 import { loginWithToken, fetchCart, fetchProducts } from "../store";
+
 import { Link, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -30,12 +32,14 @@ const App = () => {
           <nav>
             <Link to="/">Home</Link>
             <Link to="/cart">Cart</Link>
+         <Link to="/profile">Profile</Link>
             <Link to="/past">Past Orders</Link>
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/past" element={<PastOrders />} />
-          </Routes>
+             <Route path="/profile" element={<Profile />} />
+          <Routes>
         </div>
       )}
     </div>
