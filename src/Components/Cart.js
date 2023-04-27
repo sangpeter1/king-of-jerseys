@@ -9,11 +9,17 @@ const Cart = ()=> {
   return (
     <div>
       <h1>Cart</h1>
-      <pre>
+      <ul>
         {
-          JSON.stringify(cart, null, 2)
+          cart.lineItems.map(item => {
+            return(
+              <li key={item.id}>
+                {item.product.name}
+              </li>
+            )
+          })
         }
-      </pre>
+      </ul>    
     </div>
   );
 };

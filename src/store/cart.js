@@ -10,7 +10,8 @@ const cart = (state = { lineItems: [] }, action)=> {
 export const fetchCart = ()=> {
   return async(dispatch)=> {
     const token = window.localStorage.getItem('token');
-    const response = await axios.get('/api/orders/cart', {
+    const response = await axios.get('/api/orders/cart',
+    {
       headers: {
         authorization: token
       }

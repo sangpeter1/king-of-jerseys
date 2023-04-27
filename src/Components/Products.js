@@ -9,7 +9,7 @@ const Products = () => {
         {
           products.map( product => {
             return(
-              <li>
+              <li key={product.id}>
                 {product.name}
               </li>
             )
