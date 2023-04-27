@@ -22,7 +22,18 @@ const PastOrders = () => {
     <div>
       <h1>Past Orders</h1>
       {orders.map((order) => (
-        <div key={order.id}>{/* display the order details */}</div>
+        <div key={order.id}>
+          <h2>Order ID: {order.id}</h2>
+          <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
+          <h3>Items:</h3>
+          <ul>
+            {order.lineItems.map((item) => (
+              <li key={item.id}>
+                {item.product.name} - Quantity: {item.quantity}
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
     </div>
   );
