@@ -14,7 +14,6 @@ const cart = (state = { lineItems: [] }, action) => {
   }
 };
 
-
 // functionality to get the cart
 export const fetchCart = () => {
   return async (dispatch) => {
@@ -48,24 +47,24 @@ export const removeItemFromCart = (product, quantityToRemove) => {
   };
 };
 
-
-export const addProductToCart = (product, quantity)=> {
-  return async(dispatch)=> {
-    const token = window.localStorage.getItem('token');
-    const response  = await axios.post(
-    "/api/orders/cart",
-    {
-      product,
-      quantity
-    },
-    {
-      headers: {
-        authorization: token
+export const addProductToCart = (product, quantity) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.post(
+      "/api/orders/cart",
+      {
+        product,
+        quantity,
+      },
+      {
+        headers: {
+          authorization: token,
+        },
       }
-    }
-  )
-  dispatch({type: "SET_CART", cart: response.data});
-}
+    );
+    dispatch({ type: "SET_CART", cart: response.data });
+  };
+};
 
 export const checkout = () => {
   return async (dispatch) => {

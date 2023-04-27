@@ -32,14 +32,14 @@ const App = () => {
           <nav>
             <Link to="/">Home</Link>
             <Link to="/cart">Cart</Link>
-         <Link to="/profile">Profile</Link>
+            <Link to="/profile">Profile</Link>
             <Link to="/past">Past Orders</Link>
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/past" element={<PastOrders />} />
-             <Route path="/profile" element={<Profile />} />
-          <Routes>
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
         </div>
       )}
     </div>
