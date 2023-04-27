@@ -33,7 +33,6 @@ const Cart = () => {
         </div>
       ))}
       <button onClick={handleCheckout}>Checkout</button>
-      <button onClick={() => dispatch(checkout())}>Checkout</button>
       <button onClick={()=>{navigate("/products")}}>Add Items To Cart</button>
     </div>
   );
