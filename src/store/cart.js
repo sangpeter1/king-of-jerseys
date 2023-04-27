@@ -14,6 +14,12 @@ const cart = (state = { lineItems: [] }, action) => {
   }
 };
 
+const _checkout = (order) => {
+  return {
+    type: CHECKOUT,
+    order,
+  };
+};
 
 // functionality to get the cart
 export const fetchCart = () => {
@@ -64,7 +70,8 @@ export const addProductToCart = (product, quantity)=> {
       }
     }
   )
-  dispatch({type: "SET_CART", cart: response.data});
+  dispatch({type: SET_CART, cart: response.data});
+  }
 }
 
 export const checkout = () => {
@@ -85,11 +92,5 @@ export const checkout = () => {
   };
 };
 
-const _checkout = (order) => {
-  return {
-    type: CHECKOUT,
-    order,
-  };
-};
 
 export default cart;
