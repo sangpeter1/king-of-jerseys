@@ -11,7 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginWithToken());
-    dispatch(fetchProducts())
+    dispatch(fetchProducts());
   }, []);
 
   useEffect(() => {
