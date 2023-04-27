@@ -7,11 +7,10 @@ import {useNavigate} from "react-router-dom";
 const Products = () => {
   const { products } = useSelector(state => state);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
   const handleAdd = (product) => {
     dispatch(addProductToCart(product));
   }
-
   return (
     <div>
       <ul>

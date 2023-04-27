@@ -14,6 +14,13 @@ const cart = (state = { lineItems: [] }, action) => {
   }
 };
 
+const _checkout = (order) => {
+  return {
+    type: CHECKOUT,
+    order,
+  };
+};
+
 // functionality to get the cart
 export const fetchCart = () => {
   return async (dispatch) => {
@@ -61,10 +68,10 @@ export const addProductToCart = (product, quantity) => {
           authorization: token,
         },
       }
-    );
-    dispatch({ type: "SET_CART", cart: response.data });
-  };
-};
+  )
+  dispatch({type: SET_CART, cart: response.data});
+  }
+}
 
 export const checkout = () => {
   return async (dispatch) => {
@@ -84,11 +91,5 @@ export const checkout = () => {
   };
 };
 
-const _checkout = (order) => {
-  return {
-    type: CHECKOUT,
-    order,
-  };
-};
 
 export default cart;
