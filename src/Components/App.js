@@ -1,28 +1,18 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import Home from "./Home";
 import Login from "./Login";
 import Cart from "./Cart";
+import PastOrders from "./PastOrders";
 import { useSelector, useDispatch } from "react-redux";
-import { loginWithToken, fetchCart } from "../store";
+import { loginWithToken, fetchCart, fetchProducts } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
-=======
-import React, { useEffect } from 'react';
-import Home from './Home';
-import Login from './Login';
-import Cart from './Cart';
-import Products from './Products';
-import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchCart, fetchProducts } from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
->>>>>>> main
 
 const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginWithToken());
-    dispatch(fetchProducts())
+    dispatch(fetchProducts());
   }, []);
 
   useEffect(() => {
@@ -34,40 +24,20 @@ const App = () => {
   return (
     <div>
       <h1>Acme Shopping</h1>
-<<<<<<< HEAD
       {auth.id ? <Home /> : <Login />}
       {!!auth.id && (
         <div>
           <nav>
             <Link to="/">Home</Link>
             <Link to="/cart">Cart</Link>
+            <Link to="/past">Past Orders</Link>
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
+            <Route path="/past" element={<PastOrders />} />
           </Routes>
         </div>
       )}
-=======
-      {
-        auth.id ? 
-        <Home /> : <Login />
-      }
-      {
-        !!auth.id  && (
-          <div>
-            <nav>
-              <Link to='/'>Home</Link>
-              <Link to='/products'>Products</Link>
-              <Link to='/cart'>Cart</Link>
-            </nav>
-            <Routes>
-              <Route path='/cart' element={ <Cart /> } />
-              <Route path='/products' element={ <Products /> } />
-            </Routes>
-          </div>
-        )
-      }
->>>>>>> main
     </div>
   );
 };
