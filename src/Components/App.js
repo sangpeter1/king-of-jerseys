@@ -4,7 +4,7 @@ import Login from "./Login";
 import Cart from "./Cart";
 import Profile from "./Profile";
 import { useSelector, useDispatch } from "react-redux";
-import { loginWithToken, fetchCart } from "../store";
+import { fetchProducts, loginWithToken, fetchCart } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loginWithToken());
+    dispatch(fetchProducts());
   }, []);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const App = () => {
       dispatch(fetchCart());
     }
   }, [auth]);
+
   return (
     <div>
       <h1>Acme Shopping</h1>
@@ -33,6 +35,7 @@ const App = () => {
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
       )}
