@@ -4,9 +4,18 @@ const products = (state = [], action) => {
   if (action.type === "SET_PRODUCTS") {
     return action.products;
   }
+  if (action.type === "CREATE_PRODUCT") {
+    return [...state, action.product];
+  }
   return state;
 };
 
+export const createProduct = (product) => {
+  return async (dispatch) => {
+    const response = await axios.post("/api/products", product);
+    dispatch({ type: "CREATE_PRODUCT", product: response.data });
+  };
+};
 
 export const fetchProducts = () => {
   return async (dispatch) => {

@@ -4,6 +4,8 @@ import Login from "./Login";
 import Cart from "./Cart";
 import PastOrders from "./PastOrders";
 import Profile from "./Profile";
+import Product from "./Product";
+import Products from "./Products";
 import { useSelector, useDispatch } from "react-redux";
 import { loginWithToken, fetchCart, fetchProducts } from "../store";
 
@@ -34,11 +36,13 @@ const App = () => {
             <Link to="/cart">Cart</Link>
             <Link to="/profile">Profile</Link>
             <Link to="/past">Past Orders</Link>
+            <Link to="/products">Products</Link>/
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/past" element={<PastOrders />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/products" element={<Products />} />
           </Routes>
         </div>
       )}

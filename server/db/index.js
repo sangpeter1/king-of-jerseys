@@ -11,7 +11,9 @@ LineItem.belongsTo(Product);
 
 const syncAndSeed = async () => {
   await conn.sync({ force: true });
-  const [moe, lucy, larry, foo, bar, bazz, ethyl] = await Promise.all([
+  const [admin, moe, lucy, larry, foo, bar, bazz, ethyl] = await Promise.all([
+    User.create({ username: "admin", password: "123" }),
+
     User.create({ username: "moe", password: "123" }),
     User.create({ username: "lucy", password: "123" }),
     User.create({ username: "larry", password: "123" }),
@@ -43,6 +45,7 @@ const syncAndSeed = async () => {
 
   return {
     users: {
+      admin,
       moe,
       lucy,
       larry,
