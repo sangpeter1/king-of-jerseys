@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItemFromCart, checkout } from "../store/cart"; // make sure this path is correct
+import { removeItemFromCart, checkout } from "../store/cart";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -17,23 +17,40 @@ const Cart = () => {
   };
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div className="cart-container">
+      <h1 className="cart-title">Cart</h1>
       {cart.lineItems.map((item) => (
-        <div key={item.id}>
-          <span>
+        <div key={item.id} className="cart-item">
+          <span className="cart-item-name">
             {item.product.name} - {item.quantity}
           </span>
-          <button onClick={() => handleRemove(item.product, 1)}>
+          <button
+            className="cart-remove-btn"
+            onClick={() => handleRemove(item.product, 1)}
+          >
             Remove 1
           </button>
-          <button onClick={() => handleRemove(item.product, item.quantity)}>
+          <button
+            className="cart-remove-btn"
+            onClick={() => handleRemove(item.product, item.quantity)}
+          >
             Remove All
           </button>
         </div>
       ))}
-      <button onClick={handleCheckout}>Checkout</button>
-      <button onClick={()=>{navigate("/products")}}>Add Items To Cart</button>
+      <div className="cart-buttons">
+        <button className="cart-btn" onClick={handleCheckout}>
+          Checkout
+        </button>
+        <button
+          className="add-to-cart-btn"
+          onClick={() => {
+            navigate("/products");
+          }}
+        >
+          Add Items To Cart
+        </button>
+      </div>
     </div>
   );
 };
