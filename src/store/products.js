@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// product actions
 const products = (state = [], action) => {
   if (action.type === "SET_PRODUCTS") {
     return action.products;
@@ -10,6 +11,7 @@ const products = (state = [], action) => {
   return state;
 };
 
+// create products
 export const createProduct = (product) => {
   return async (dispatch) => {
     const response = await axios.post("/api/products", product);
@@ -17,6 +19,7 @@ export const createProduct = (product) => {
   };
 };
 
+// get all products
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
@@ -29,5 +32,14 @@ export const fetchProducts = () => {
     }
   };
 };
+
+// search for a product by name
+export const searchProducts = (query) => {
+  return async (dispatch) => {
+    const response = await axios.get(`/api/products/search?q=${query}`);
+    dispatch({ type: "SET_PRODUCTS", products: response.data });
+  };
+};
+
 
 export default products;
