@@ -1,89 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addProductToCart, createProduct } from "../store";
-import { useNavigate, Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+import { fetchProducts } from "../store/products";
+import { addProductToCart } from "../store/cart";
+import CreateProduct from "./CreateProduct";
 
-const Products = () => {
-  const { products } = useSelector((state) => state);
-  const [show, setShow] = useState(false);
-  const [name, setName] = useState("");
-  const [errors, setErrors] = useState([]);
+const ViewAllProducts = () => {
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
 
-  const handleAdd = (product) => {
-    dispatch(addProductToCart(product));
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const handleAddToCart = (product) => {
+    dispatch(addProductToCart(product, 1));
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const save = async (ev) => {
-    ev.preventDefault();
-    try {
-      await dispatch(createProduct({ name }));
-      setName("");
-      setErrors[[]];
-    } catch (ex) {
-      setErrors(ex.response.data.error.errors);
-    }
-    navigate("/products");
-  };
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <>
-      <div>
-        <Button variant="success" size="lg" onClick={handleShow}>
-          Create
-        </Button>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
-            <Form onSubmit={save}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  value={name}
-                  onChange={(ev) => setName(ev.target.value)}
-                />
-                <Button
-                  onClick={handleClose}
-                  variant="outline-success"
-                  type="submit"
-                >
-                  Submit
-                </Button>
-                <ul>
-                  {errors.map((error, idx) => {
-                    return <li key={idx}>{error.message}</li>;
-                  })}
-                </ul>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-        </Modal>
+    <div className="view-all-products-container">
+      <CreateProduct />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
-      <div>
-        <ul>
-          {products.map((product) => {
-            return (
-              <li key={product.id}>
-                {product.name}
-                <button
-                  onClick={() => {
-                    handleAdd(product);
-                  }}
-                >
-                  Add Item To Cart
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="product-list-container">
+        {filteredProducts.map((product) => {
+          return (
+            <div className="product-item" key={product.id}>
+              <h3>{product.name}</h3>
+              <button onClick={() => handleAddToCart(product)}>
+                Add to Cart
+              </button>
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 
-export default Products;
+export default ViewAllProducts;
