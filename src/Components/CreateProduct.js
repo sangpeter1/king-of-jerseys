@@ -1,51 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../store/products";
-import { addProductToCart } from "../store/cart";
-import CreateProduct from "./CreateProduct";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createProduct } from "../store/products";
 
-const ViewAllProducts = () => {
-  const [search, setSearch] = useState("");
+const CreateProduct = () => {
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-  const handleAddToCart = (product) => {
-    dispatch(addProductToCart(product, 1));
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    dispatch(createProduct({ name }));
+    setName("");
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
-    <div className="view-all-products-container">
-      <CreateProduct />
-      <div className="search-container">
+    <div className="create-product-container">
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Add a new product..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-      </div>
-      <div className="product-list-container">
-        {filteredProducts.map((product) => {
-          return (
-            <div className="product-item" key={product.id}>
-              <h3>{product.name}</h3>
-              <button onClick={() => handleAddToCart(product)}>
-                Add to Cart
-              </button>
-            </div>
-          );
-        })}
-      </div>
+        <button className="add-product=btn" type="submit">
+          Add Product
+        </button>
+      </form>
     </div>
   );
 };
 
-export default ViewAllProducts;
+export default CreateProduct;

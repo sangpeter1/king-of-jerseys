@@ -12,17 +12,11 @@ app.get("/", async (req, res, next) => {
   }
 });
 
-// search for product by name
-app.get("/search", async (req, res, next) => {
+// for creating new products
+app.post("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll({
-      where: {
-        name: {
-          [conn.Sequelize.Op.iLike]: "%" + req.query.q + "%", // Use the iLike operator for case-insensitive search
-        },
-      },
-    });
-    res.send(products);
+    const product = await Product.create(req.body);
+    res.status(201).send(product);
   } catch (ex) {
     next(ex);
   }

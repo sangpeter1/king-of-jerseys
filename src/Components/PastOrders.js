@@ -19,26 +19,22 @@ const PastOrders = () => {
   }, []);
 
   return (
-    <div>
+    <div className="past-orders-container">
       <h1>Past Orders</h1>
-      {orders.length > 0 ? (
-        orders.map((order) => (
-          <div key={order.id} className="order-box">
-            <h2>Order ID: {order.id}</h2>
-            <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
-            <h3>Items:</h3>
-            <ul>
-              {order.lineItems.map((item) => (
-                <li key={item.id}>
-                  {item.product.name} - Quantity: {item.quantity}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      ) : (
-        <h3 style={{ textAlign: "center" }}>No past orders.</h3>
-      )}
+      {orders.map((order) => (
+        <div key={order.id} className="order-box">
+          <h2>Order ID: {order.id}</h2>
+          <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
+          <h3>Items:</h3>
+          <ul>
+            {order.lineItems.map((item) => (
+              <li key={item.id}>
+                {item.product.name} - Quantity: {item.quantity}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
