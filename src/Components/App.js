@@ -42,12 +42,14 @@ const App = () => {
             <Link to="/profile">Profile</Link>
             <Link to="/past">Past Orders</Link>
             <Link to="/products">Products</Link>
+            {/* <Link to="/create">Create Product</Link> */}
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/past" element={<PastOrders />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/products" element={<ViewAllProducts />} />{" "}
+            <Route path="/products" element={<ViewAllProducts />} />
+            {/* <Route path="/create" element={<CreateProduct />} /> */}
           </Routes>
         </div>
       )}
