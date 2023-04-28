@@ -168,9 +168,11 @@ ul li {
   transition: all 0.2s ease-in-out;
 }
 
-.add-to-cart-btn {
+.add-to-cart-btn,
+.logout-btn,
+.add-product-btn {
   background-color: #f8f9fa;
-  color: grey;
+  color: #007bff;
   border: 1px solid #007bff;
   padding: 10px 20px;
   border-radius: 3px;
@@ -178,11 +180,17 @@ ul li {
   transition: all 0.2s ease-in-out;
 }
 
+.logout-btn {
+  margin-left: 1vw;
+}
+
 .cart-btn:hover {
   background-color: #0062cc;
 }
-.add-to-cart-btn:hover {
-  background-color: #0062cc;
+.add-to-cart-btn:hover,
+.logout-btn:hover,
+.add-product-btn:hover {
+  background-color: #007bff;
   color: white;
 }
 

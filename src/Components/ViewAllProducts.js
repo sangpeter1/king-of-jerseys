@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { addProductToCart } from "../store/cart";
+import CreateProduct from "./CreateProduct";
 
 const ViewAllProducts = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.auth); // get the user from auth state
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -22,6 +24,7 @@ const ViewAllProducts = () => {
 
   return (
     <div className="view-all-products-container">
+      {<CreateProduct />}
       <div className="search-container">
         <input
           type="text"
