@@ -22,7 +22,7 @@ const PastOrders = () => {
     <div>
       <h1>Past Orders</h1>
       {orders.map((order) => (
-        <div key={order.id}>
+        <div key={order.id} className="order-box">
           <h2>Order ID: {order.id}</h2>
           <p>Order Date: {new Date(order.createdAt).toLocaleString()}</p>
           <h3>Items:</h3>
