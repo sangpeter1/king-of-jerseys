@@ -35,6 +35,9 @@ const Products = () => {
   return (
     <>
       <div>
+        <Button variant="success" size="lg" onClick={handleShow}>
+          Create
+        </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Body>
             <Form onSubmit={save}>
