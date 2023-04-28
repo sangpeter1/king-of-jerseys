@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItemFromCart, checkout } from "../store/cart"; // make sure this path is correct
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleRemove = (product, quantityToRemove) => {
     dispatch(removeItemFromCart(product, quantityToRemove));
   };
@@ -31,6 +33,7 @@ const Cart = () => {
         </div>
       ))}
       <button onClick={handleCheckout}>Checkout</button>
+      <button onClick={()=>{navigate("/products")}}>Add Items To Cart</button>
     </div>
   );
 };

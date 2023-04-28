@@ -12,7 +12,7 @@ const Products = () => {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleAdd = (product) => {
     dispatch(addProductToCart(product));
   };
@@ -25,7 +25,6 @@ const Products = () => {
     try {
       await dispatch(createProduct({ name }));
       setName("");
-
       setErrors[[]];
     } catch (ex) {
       setErrors(ex.response.data.error.errors);
