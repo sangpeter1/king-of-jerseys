@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { attemptLogin } from '../store';
+import { register } from '../store';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
-const Login = ()=> {
-  // create a variable that will keep track of whether we're on login page
-  const url = useParams();
+const Register = ()=> {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -17,16 +15,22 @@ const Login = ()=> {
     setCredentials({...credentials, [ ev.target.name ]: ev.target.value });
   };
 
-  const login = (ev)=> {
+  const _register = async(ev) => {
     ev.preventDefault();
-    dispatch(attemptLogin(credentials));
-    navigate('/');
-  };
+    try {
+      await dispatch(register(credentials));
+      navigate('/');
+
+    }
+    catch(ex) {
+      console.log(ex);
+    }
+  }
   return (
     <div>
       {/* if url = '/' return login if not return Register */}
-      <h2>Login</h2>
-      <form onSubmit={ login }>
+      <h2>Register</h2>
+      <form onSubmit={ _register }>
         <input
           placeholder='username'
           value = { credentials.username }
@@ -39,11 +43,11 @@ const Login = ()=> {
           value={ credentials.password }
           onChange = { onChange }
         />
-        <button>Login</button>
+        <button>Register</button>
       </form>
     </div>
 
   );
 };
 
-export default Login;
+export default Register;

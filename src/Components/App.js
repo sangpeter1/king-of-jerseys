@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Home from "./Home";
 import Login from "./Login";
+import Register from './Register';
 import Cart from "./Cart";
 import PastOrders from "./PastOrders";
 import Profile from "./Profile";
@@ -33,9 +34,7 @@ const App = () => {
   return (
     <div>
       <h1>Acme Shopping</h1>
-      {auth.id ? <Home /> : <Login />}
-      {!!auth.id && (
-        <div>
+      {auth.id ?
           <nav>
             <Link to="/">Home</Link>
             <Link to="/cart">Cart</Link>
@@ -43,16 +42,21 @@ const App = () => {
             <Link to="/past">Past Orders</Link>
             <Link to="/products">Products</Link>
             {/* <Link to="/create">Create Product</Link> */}
-          </nav>
-          <Routes>
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/past" element={<PastOrders />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/products" element={<ViewAllProducts />} />
-            {/* <Route path="/create" element={<CreateProduct />} /> */}
-          </Routes>
-        </div>
-      )}
+          </nav>: 
+          <div> 
+            <Link to='/login'>Login</Link> <Link to='/register'>Register</Link> 
+          </div>
+      }
+      <Routes>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/past" element={<PastOrders />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/products" element={<ViewAllProducts />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/create" element={<CreateProduct />} /> */}
+      </Routes>
     </div>
   );
 };

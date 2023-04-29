@@ -12,6 +12,14 @@ app.post("/", async (req, res, next) => {
   }
 });
 
+app.post("/register", async (req, res, next) => {
+  try {
+    res.send(await User.register(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 app.put("/:token", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.params.token);
