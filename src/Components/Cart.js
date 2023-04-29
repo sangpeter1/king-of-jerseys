@@ -21,9 +21,18 @@ const Cart = () => {
       <h1 className="cart-title">Cart</h1>
       {cart.lineItems.map((item) => (
         <div key={item.id} className="cart-item">
+          <img
+            style={{
+              display: !item.product.image ? "none" : "",
+            }}
+            width="100"
+            height="100"
+            src={item.product.image}
+          />
           <span className="cart-item-name">
             {item.product.name} - {item.quantity}
           </span>
+
           <button
             className="cart-remove-btn"
             onClick={() => handleRemove(item.product, 1)}

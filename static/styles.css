@@ -12,6 +12,10 @@ h2 {
   text-align: center;
 }
 
+Link {
+  text-decoration: none;
+}
+
 nav {
   background-color: #343a40;
   color: #fff;

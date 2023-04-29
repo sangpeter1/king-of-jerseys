@@ -4,8 +4,8 @@ import Login from "./Login";
 import Cart from "./Cart";
 import PastOrders from "./PastOrders";
 import Profile from "./Profile";
+import Product from "./Product";
 import ViewAllProducts from "./ViewAllProducts"; // Corrected import
-import CreateProduct from "./CreateProduct";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchProducts,
@@ -42,14 +42,13 @@ const App = () => {
             <Link to="/profile">Profile</Link>
             <Link to="/past">Past Orders</Link>
             <Link to="/products">Products</Link>
-            {/* <Link to="/create">Create Product</Link> */}
           </nav>
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/past" element={<PastOrders />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/products" element={<ViewAllProducts />} />
-            {/* <Route path="/create" element={<CreateProduct />} /> */}
+            <Route path="/products/:id" element={<Product />} />
           </Routes>
         </div>
       )}
