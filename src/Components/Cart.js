@@ -4,7 +4,7 @@ import { removeItemFromCart, checkout } from "../store/cart";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state);
+  const { cart, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
