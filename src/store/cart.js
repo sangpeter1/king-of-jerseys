@@ -68,10 +68,10 @@ export const addProductToCart = (product, quantity) => {
           authorization: token,
         },
       }
-  )
-  dispatch({type: SET_CART, cart: response.data});
-  }
-}
+    );
+    dispatch({ type: SET_CART, cart: response.data });
+  };
+};
 
 export const checkout = () => {
   return async (dispatch) => {
@@ -90,6 +90,5 @@ export const checkout = () => {
     dispatch({ type: "CLEAR_CART" }); // clear the cart after checkout
   };
 };
-
 
 export default cart;

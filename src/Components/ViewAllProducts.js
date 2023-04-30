@@ -16,6 +16,7 @@ const ViewAllProducts = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -34,15 +35,15 @@ const ViewAllProducts = () => {
 
   const save = async (ev) => {
     ev.preventDefault();
-    await dispatch(createProduct({ name }));
+    await dispatch(createProduct({ name, image }));
     setName("");
+    setBaseImage("");
     navigate("/products");
   };
 
   return (
-    <div className="view-all-products-container">
-      {" "}
-      <div>
+    <>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           style={{ display: !auth.isAdmin ? "none" : "" }}
           variant="success"
@@ -52,16 +53,23 @@ const ViewAllProducts = () => {
           Create
         </Button>
       </div>
-      <div>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
-            <Form onSubmit={save}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  value={name}
-                  onChange={(ev) => setName(ev.target.value)}
-                />
+      <div className="view-all-products-container">
+        {" "}
+        <div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Body>
+              <Form onSubmit={save}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    value={name}
+                    onChange={(ev) => setName(ev.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formFile" className="mb-3">
+                  <Form.Label>Default file input example</Form.Label>
+                  <Form.Control type="file" />
+                </Form.Group>
                 <Button
                   onClick={handleClose}
                   variant="outline-success"
@@ -69,49 +77,49 @@ const ViewAllProducts = () => {
                 >
                   Submit
                 </Button>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      </div>
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="product-list-container">
-        {filteredProducts.map((product) => {
-          return (
-            <div className="product-item" key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <img
-                  style={{
-                    display: !product.image ? "none" : "",
-                  }}
-                  width="150"
-                  height="150"
-                  src={product.image}
-                />
-              </Link>
+              </Form>
+            </Modal.Body>
+          </Modal>
+        </div>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="product-list-container">
+          {filteredProducts.map((product) => {
+            return (
+              <div className="product-item" key={product.id}>
+                <Link to={`/products/${product.id}`}>
+                  <img
+                    style={{
+                      display: !product.image ? "none" : "",
+                    }}
+                    width="150"
+                    height="150"
+                    src={product.image}
+                  />
+                </Link>
 
-              <Link
-                style={{ textDecoration: "none" }}
-                to={`/products/${product.id}`}
-              >
-                <h3>{product.name}</h3>
-              </Link>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/products/${product.id}`}
+                >
+                  <h3>{product.name}</h3>
+                </Link>
 
-              <button onClick={() => handleAddToCart(product)}>
-                Add to Cart
-              </button>
-            </div>
-          );
-        })}
+                <button onClick={() => handleAddToCart(product)}>
+                  Add to Cart
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -32,6 +32,11 @@ const User = conn.define("user", {
   },
 });
 
+User.register = async function (credentials) {
+  const user = await this.create(credentials);
+  return user.generateToken();
+};
+
 User.prototype.createOrder = async function () {
   const cart = await this.getCart();
   cart.isCart = false;

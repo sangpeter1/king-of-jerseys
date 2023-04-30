@@ -17,6 +17,7 @@ const Product = () => {
   const onChange = (ev) => {
     setReviews(ev.target.value);
   };
+
   const onSubmit = async (ev) => {
     ev.preventDefault();
     await setReviews_([Reviews, ...Reviews_]);
@@ -44,53 +45,54 @@ const Product = () => {
                     height="400"
                     src={product.image}
                   />
-                  <button onClick={() => handleAddToCart(product)}>
+                  <button
+                    style={{ margin: "1rem" }}
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Add to Cart
                   </button>
+                </div>
 
-                  <div key={product.id}>
-                    <Form onSubmit={onSubmit}>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="inputGroup-sizing-lg"
-                      >
-                        <Form.Label>My Review</Form.Label>
-                        <Form.Control
-                          value={Reviews}
-                          as="textarea"
-                          rows={5}
-                          placeholder="I love this product because..."
-                          onChange={onChange}
-                        />
-                      </Form.Group>
-                      <Button variant="primary" type="submit">
-                        Submit
-                      </Button>
-                    </Form>
-
-                    <div
-                      key={product.id}
-                      className="view-all-products-container"
+                <div style={{ margin: "2rem" }}>
+                  <Form onSubmit={onSubmit}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="inputGroup-sizing-lg"
                     >
-                      <h3>Reviews:</h3>
-                      <Card
-                        style={{
-                          display: !product.review ? "none" : "",
-                          width: "18rem",
-                        }}
-                      >
+                      <Form.Label>My Review</Form.Label>
+                      <Form.Control
+                        value={Reviews}
+                        as="textarea"
+                        rows={5}
+                        placeholder="I love this product because..."
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                      Submit
+                    </Button>
+                  </Form>
+
+                  <div className="view-all-products-container">
+                    <h3>Reviews</h3>
+                    <Card
+                      style={{
+                        display: !product.review ? "none" : "",
+                        width: "18rem",
+                        margin: "1rem",
+                      }}
+                    >
+                      <Card.Body>
+                        <Card.Text>{product.review}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                    {Reviews_.map((item) => (
+                      <Card style={{ width: "18rem", margin: "1rem" }}>
                         <Card.Body>
-                          <Card.Text>{product.review}</Card.Text>
+                          <Card.Text>{item}</Card.Text>
                         </Card.Body>
                       </Card>
-                      {Reviews_.map((item) => (
-                        <Card style={{ width: "18rem" }}>
-                          <Card.Body>
-                            <Card.Text>{item}</Card.Text>
-                          </Card.Body>
-                        </Card>
-                      ))}
-                    </div>
+                    ))}
                   </div>
                 </div>
               </>

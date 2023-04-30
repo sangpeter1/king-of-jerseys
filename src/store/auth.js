@@ -12,6 +12,14 @@ export const logout = () => {
   return { type: "SET_AUTH", auth: {} };
 };
 
+export const register = (credentials) => {
+  return async (dispatch) => {
+    const response = await axios.post("/api/auth/register", credentials);
+    window.localStorage.setItem("token", response.data);
+    dispatch(loginWithToken());
+  };
+};
+
 export const loginWithToken = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
