@@ -7,15 +7,16 @@ const Home = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const _logout = ()=> {
     dispatch(logout());
     navigate('/login');
   }
+
   return (
     <div>
-      {/* <h1>Home</h1> */}
       <div>
-        Welcome {auth.username}!!
+        <h1>Welcome {auth.username}!!</h1>
         <button className="logout-btn" onClick={() => _logout()}>
           Logout
         </button>
