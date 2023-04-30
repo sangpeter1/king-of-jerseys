@@ -19,7 +19,9 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Cart</h1>
-      {cart.lineItems.map((item) => (
+      {
+      auth.id && cart.id ?
+      cart.lineItems.map((item) => (
         <div key={item.id} className="cart-item">
           <span className="cart-item-name">
             {item.product.name} - {item.quantity}
@@ -37,7 +39,8 @@ const Cart = () => {
             Remove All
           </button>
         </div>
-      ))}
+      )) : null
+      }
       <div className="cart-buttons">
         <button className="cart-btn" onClick={handleCheckout}>
           Checkout

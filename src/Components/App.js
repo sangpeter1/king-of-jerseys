@@ -23,7 +23,9 @@ const App = () => {
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchProducts());
-    dispatch(addProductToCart());
+    if(auth.id){
+      dispatch(addProductToCart());
+    }
   }, []);
 
   useEffect(() => {
@@ -44,12 +46,12 @@ const App = () => {
             <Link to="/products">Products</Link>
             {/* <Link to="/create">Create Product</Link> */}
           </nav> : 
-          <div> 
+          <nav>
             <Link to='/login'>Login</Link>
             <Link to='/register'>Register</Link> 
             <Link to="/cart">Cart</Link>
             <Link to="/products">Products</Link>
-          </div>
+          </nav>
       }
       <Routes>
         <Route path="/" element={<Home />}/>
