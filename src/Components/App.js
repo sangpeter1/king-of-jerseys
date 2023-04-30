@@ -43,7 +43,7 @@ const App = () => {
             <Link to="/past">Past Orders</Link>
             <Link to="/products">Products</Link>
             {/* <Link to="/create">Create Product</Link> */}
-          </nav>: 
+          </nav> : 
           <div> 
             <Link to='/login'>Login</Link>
             <Link to='/register'>Register</Link> 
@@ -52,13 +52,13 @@ const App = () => {
           </div>
       }
       <Routes>
+        <Route path="/" element={<Home />}/>
         <Route path="/cart" element={<Cart />} />
         <Route path="/past" element={<PastOrders />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<ViewAllProducts />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />}/>
         {/* <Route path="/create" element={<CreateProduct />} /> */}
       </Routes>
     </div>

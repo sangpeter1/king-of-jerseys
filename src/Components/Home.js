@@ -13,16 +13,23 @@ const Home = () => {
     navigate('/login');
   }
 
-  return (
-    <div>
+  if(auth.id){
+    return (
       <div>
-        <h1>Welcome {auth.username}!!</h1>
-        <button className="logout-btn" onClick={() => _logout()}>
-          Logout
-        </button>
+        <div>
+          <h1>Welcome {auth.username}!!</h1>
+          <button className="logout-btn" onClick={() => _logout()}>
+            Logout
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return(
+      <h1>Welcome To Our Store</h1>
+    )
+  }
+
 };
 
 export default Home;
