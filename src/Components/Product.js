@@ -34,25 +34,23 @@ const Product = () => {
           .filter((product) => product.id === id)
           .map((product) => {
             return (
-              <>
-                <div className="view-all-products-container" key={product.id}>
-                  <h1>{product.name}</h1>
-                  <img
-                    style={{
-                      display: !product.image ? "none" : "",
-                    }}
-                    width="400"
-                    height="400"
-                    src={product.image}
-                  />
-                  <Button
-                    variant="outline-success"
-                    style={{ margin: "1rem" }}
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Add to Cart
-                  </Button>
-                </div>
+              <div className="view-all-products-container" key={product.id}>
+                <h1>{product.name}</h1>
+                <img
+                  style={{
+                    display: !product.image ? "none" : "",
+                  }}
+                  width="400"
+                  height="400"
+                  src={product.image}
+                />
+                <Button
+                  variant="outline-success"
+                  style={{ margin: "1rem" }}
+                  onClick={() => handleAddToCart(product)}
+                >
+                  Add to Cart
+                </Button>
 
                 <div style={{ margin: "2rem" }}>
                   <Form onSubmit={onSubmit}>
@@ -87,8 +85,11 @@ const Product = () => {
                         <Card.Text>{product.review}</Card.Text>
                       </Card.Body>
                     </Card>
-                    {Reviews_.map((item) => (
-                      <Card style={{ width: "18rem", margin: "1rem" }}>
+                    {Reviews_.map((item, index) => (
+                      <Card
+                        key={index}
+                        style={{ width: "18rem", margin: "1rem" }}
+                      >
                         <Card.Body>
                           <Card.Text>{item}</Card.Text>
                         </Card.Body>
@@ -96,7 +97,7 @@ const Product = () => {
                     ))}
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
       </div>
