@@ -45,12 +45,13 @@ const Product = () => {
                     height="400"
                     src={product.image}
                   />
-                  <button
+                  <Button
+                    variant="outline-success"
                     style={{ margin: "1rem" }}
                     onClick={() => handleAddToCart(product)}
                   >
                     Add to Cart
-                  </button>
+                  </Button>
                 </div>
 
                 <div style={{ margin: "2rem" }}>
@@ -59,7 +60,7 @@ const Product = () => {
                       className="mb-3"
                       controlId="inputGroup-sizing-lg"
                     >
-                      <Form.Label>My Review</Form.Label>
+                      <Form.Label>Write a Review</Form.Label>
                       <Form.Control
                         value={Reviews}
                         as="textarea"
@@ -68,13 +69,13 @@ const Product = () => {
                         onChange={onChange}
                       />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="outline-primary" type="submit">
                       Submit
                     </Button>
                   </Form>
 
                   <div className="view-all-products-container">
-                    <h3>Reviews</h3>
+                    <h4>Reviews</h4>
                     <Card
                       style={{
                         display: !product.review ? "none" : "",

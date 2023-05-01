@@ -16,7 +16,6 @@ const ViewAllProducts = () => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -35,9 +34,8 @@ const ViewAllProducts = () => {
 
   const save = async (ev) => {
     ev.preventDefault();
-    await dispatch(createProduct({ name, image }));
+    await dispatch(createProduct({ name }));
     setName("");
-    setBaseImage("");
     navigate("/products");
   };
 
@@ -66,10 +64,7 @@ const ViewAllProducts = () => {
                     onChange={(ev) => setName(ev.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="formFile" className="mb-3">
-                  <Form.Label>Default file input example</Form.Label>
-                  <Form.Control type="file" />
-                </Form.Group>
+
                 <Button
                   onClick={handleClose}
                   variant="outline-success"
@@ -108,12 +103,17 @@ const ViewAllProducts = () => {
                   style={{ textDecoration: "none" }}
                   to={`/products/${product.id}`}
                 >
-                  <h3>{product.name}</h3>
+                  <h3 style={{ color: " #6c757d", textAlign: "center" }}>
+                    {product.name}
+                  </h3>
                 </Link>
 
-                <button onClick={() => handleAddToCart(product)}>
+                <Button
+                  variant="outline-success"
+                  onClick={() => handleAddToCart(product)}
+                >
                   Add to Cart
-                </button>
+                </Button>
               </div>
             );
           })}
