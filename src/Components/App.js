@@ -24,10 +24,13 @@ const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchProducts());
-    dispatch(addProductToCart());
+    if (auth.id) {
+      dispatch(addProductToCart());
+    }
   }, []);
 
   useEffect(() => {

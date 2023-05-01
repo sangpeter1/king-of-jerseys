@@ -7,21 +7,26 @@ const Home = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const _logout = () => {
     dispatch(logout());
     navigate("/login");
   };
-  return (
-    <div>
-      {/* <h1>Home</h1> */}
+
+  if (auth.id) {
+    return (
       <div>
-        Welcome {auth.username}!!
-        <button className="logout-btn" onClick={() => _logout()}>
-          Logout
-        </button>
+        <div>
+          <h1>Welcome {auth.username}!!</h1>
+          <button className="logout-btn" onClick={() => _logout()}>
+            Logout
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <h1>Welcome To Our Store</h1>;
+  }
 };
 
 export default Home;

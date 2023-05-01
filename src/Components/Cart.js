@@ -4,7 +4,7 @@ import { removeItemFromCart, checkout } from "../store/cart";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state);
+  const { cart, auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,7 +19,9 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h1 className="cart-title">Cart</h1>
-      {cart.lineItems.map((item) => (
+      {
+      auth.id && cart.id ?
+      cart.lineItems.map((item) => (
         <div key={item.id} className="cart-item">
           <img
             style={{
@@ -46,7 +48,8 @@ const Cart = () => {
             Remove All
           </button>
         </div>
-      ))}
+      )) : null
+      }
       <div className="cart-buttons">
         <button className="cart-btn" onClick={handleCheckout}>
           Checkout
