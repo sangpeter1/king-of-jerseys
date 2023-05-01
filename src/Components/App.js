@@ -60,7 +60,10 @@ const App = () => {
           }}
         >
           Welcome,{" "}
-          <Link style={{ textDecoration: "none" }} to="/profile">
+          <Link
+            style={{ textDecoration: "none", color: "green" }}
+            to="/profile"
+          >
             {" "}
             {auth.username}!
           </Link>
@@ -71,7 +74,7 @@ const App = () => {
               size="xl"
             />
           </Link>
-          <Button variant="outline-warning" size="sm" onClick={() => _logout()}>
+          <Button variant="warning" size="sm" onClick={() => _logout()}>
             Logout
           </Button>
         </div>
@@ -85,12 +88,15 @@ const App = () => {
           <Link to="/past">Past Orders</Link>
         </nav>
       ) : (
-        <div>
+        <nav>
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
-        </div>
+          <Link to="/products">Products</Link>
+          <Link to="/cart">Cart</Link>
+        </nav>
       )}
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/past" element={<PastOrders />} />
         <Route path="/profile" element={<Profile />} />
@@ -98,7 +104,6 @@ const App = () => {
         <Route path="/products/:id" element={<Product />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

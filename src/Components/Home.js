@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
 import { useNavigate } from "react-router-dom";
+import Jerseys from "../Images/SportJerseys.jpeg";
 
 const Home = () => {
   const { auth } = useSelector((state) => state);
@@ -17,10 +18,11 @@ const Home = () => {
     return (
       <div>
         <div>
-          <h1>Welcome {auth.username}!!</h1>
-          <button className="logout-btn" onClick={() => _logout()}>
-            Logout
-          </button>
+          <img
+            style={{ width: "100%", borderRadius: "5px" }}
+            src={Jerseys}
+            height={500}
+          />
         </div>
       </div>
     );
