@@ -26,11 +26,11 @@ export const fetchCart = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
     const response = await axios.get("/api/orders/cart", {
-        headers: {
-          authorization: token,
-        },
+      headers: {
+        authorization: token,
+      },
     });
-      dispatch({ type: SET_CART, cart: response.data });
+    dispatch({ type: SET_CART, cart: response.data });
   };
 };
 
@@ -57,21 +57,21 @@ export const removeItemFromCart = (product, quantityToRemove) => {
 export const addProductToCart = (product, quantity) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-      const response = await axios.post(
-        "/api/orders/cart",
-        {
-          product,
-          quantity,
+    const response = await axios.post(
+      "/api/orders/cart",
+      {
+        product,
+        quantity,
+      },
+      {
+        headers: {
+          authorization: token,
         },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-    )
-    dispatch({type: SET_CART, cart: response.data});
-  }
-}
+      }
+    );
+    dispatch({ type: SET_CART, cart: response.data });
+  };
+};
 
 export const checkout = () => {
   return async (dispatch) => {
@@ -90,6 +90,5 @@ export const checkout = () => {
     dispatch({ type: "CLEAR_CART" }); // clear the cart after checkout
   };
 };
-
 
 export default cart;

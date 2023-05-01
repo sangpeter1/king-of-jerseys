@@ -18,7 +18,7 @@ export const register = (credentials) => {
     window.localStorage.setItem("token", response.data);
     dispatch(loginWithToken());
   };
-}
+};
 
 export const loginWithToken = () => {
   return async (dispatch) => {

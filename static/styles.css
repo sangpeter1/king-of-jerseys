@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   margin: 0;
-  padding: 0;
+  padding: 2rem;
   color: #343a40;
 }
 
@@ -10,6 +10,10 @@ h1,
 h2 {
   color: #6c757d;
   text-align: center;
+}
+
+Link {
+  text-decoration: none;
 }
 
 nav {
