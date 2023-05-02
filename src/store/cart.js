@@ -2,13 +2,16 @@ import axios from "axios";
 
 export const SET_CART = "SET_CART";
 export const CHECKOUT = "CHECKOUT";
+export const SET_CART_ITEM_COUNT = "SET_CART_ITEM_COUNT";
 
-const cart = (state = { lineItems: [] }, action) => {
+const cart = (state = { lineItems: [], itemCount: 0 }, action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
     case CHECKOUT:
-      return { lineItems: [] }; // clear the cart after checkout
+      return { lineItems: [], itemCount: 0 }; // clear the cart after checkout
+    case SET_CART_ITEM_COUNT:
+      return { ...state, itemCount: action.itemCount };
     default:
       return state;
   }
@@ -18,6 +21,13 @@ const _checkout = (order) => {
   return {
     type: CHECKOUT,
     order,
+  };
+};
+
+const _setCartItemCount = (itemCount) => {
+  return {
+    type: SET_CART_ITEM_COUNT,
+    itemCount,
   };
 };
 

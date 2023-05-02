@@ -21,7 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, cart } = useSelector((state) => state); // get cart state from the store
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -43,6 +43,18 @@ const App = () => {
     dispatch(logout());
     navigate("/login");
   };
+
+  let totalQuantity = 0;
+  function getQuantityOfItems() {
+    for (let i = 0; i < cart.lineItems.length; i++) {
+      const item = cart.lineItems[i];
+      totalQuantity += item.quantity;
+    }
+  }
+
+  console.log(`total: ${totalQuantity}`);
+
+  getQuantityOfItems();
 
   return (
     <div>
@@ -74,6 +86,7 @@ const App = () => {
               size="xl"
             />
           </Link>
+          {totalQuantity}
           <Button variant="warning" size="sm" onClick={() => _logout()}>
             Logout
           </Button>
