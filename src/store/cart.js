@@ -145,39 +145,6 @@ export const addProductToCart = (product) => {
   };
 };
 
-// export const addProductToCart = (product) => {
-//   return async (dispatch, getState) => {
-//     if (getState().auth.id) {
-//       const token = window.localStorage.getItem("token");
-//       const response = await axios.post(
-//         "/api/orders/cart",
-//         {
-//           product,
-//           quantity: 1,
-//         },
-//         {
-//           headers: {
-//             authorization: token,
-//           },
-//         }
-//       );
-//       dispatch(fetchCart());
-//     } else {
-//       const cart = localCart();
-//       const lineItem = cart.lineItems.find(
-//         (lineItem) => lineItem.product.id === product.id
-//       );
-//       if (!lineItem) {
-//         cart.lineItems.push({ product, quantity: 1 });
-//       } else {
-//         lineItem.quantity++;
-//       }
-//       window.localStorage.setItem("cart", JSON.stringify(cart));
-//       dispatch(fetchCart());
-//     }
-//   };
-// };
-
 export const checkout = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
