@@ -72,15 +72,6 @@ const App = () => {
     navigate("/login");
   };
 
-  let totalQuantity = 0;
-  function getQuantityOfItems() {
-    for (let i = 0; i < cart.lineItems.length; i++) {
-      const item = cart.lineItems[i];
-      totalQuantity += item.quantity;
-    }
-  }
-
-  getQuantityOfItems();
 
   return (
     <div>

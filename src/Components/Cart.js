@@ -10,10 +10,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleRemove = (product, quantityToRemove) => {
-    if (product && quantityToRemove) {
-      dispatch(removeItemFromCart(product, quantityToRemove));
-    }
-    dispatch(_guestCheckout());
+    dispatch(removeItemFromCart(product, quantityToRemove));
   };
 
   const handleCheckout = () => {

@@ -24,22 +24,12 @@ const _checkout = (order) => {
   };
 };
 
-const _guestCheckout = () => {
+
+export const _guestCheckout = () => {
   return {
     type: CHECKOUT,
-
-// functionality to get the cart
-export const fetchCart = () => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem("token");
-    const response = await axios.get("/api/orders/cart", {
-      headers: {
-        authorization: token,
-      },
-    });
-    dispatch({ type: SET_CART, cart: response.data });
-  };
-};
+  }
+}
 
 const localCart = () => {
   let cart = JSON.parse(window.localStorage.getItem("cart"));
