@@ -52,8 +52,6 @@ const App = () => {
     }
   }
 
-  console.log(`total: ${totalQuantity}`);
-
   getQuantityOfItems();
 
   return (
