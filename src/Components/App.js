@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
@@ -20,13 +20,19 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
+// pushing to handle merge conflicts
+
 const App = () => {
-  const { auth, cart } = useSelector((state) => state); // get cart state from the store
+  const { auth, cart } = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const prevAuth = useRef({});
 
   useEffect(() => {
-    dispatch(loginWithToken());
+    dispatch(loginWithToken()).catch((ex) => {
+      dispatch(fetchCart());
+    });
     dispatch(fetchProducts());
     if (auth.id) {
       dispatch(addProductToCart());
@@ -34,10 +40,32 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (auth.id) {
+    if (!prevAuth.current.id && auth.id) {
+      console.log("logged in");
+      dispatch(fetchCart());
+    }
+    if (prevAuth.current.id && !auth.id) {
+      console.log("logged out");
       dispatch(fetchCart());
     }
   }, [auth]);
+
+  useEffect(() => {
+    prevAuth.current = auth;
+  });
+
+  let totalQuantity = 0;
+
+  function getQuantityOfItems() {
+    for (let i = 0; i < cart.lineItems.length; i++) {
+      const item = cart.lineItems[i];
+      totalQuantity += item.quantity;
+    }
+  }
+
+  console.log(`total: ${totalQuantity}`);
+
+  getQuantityOfItems();
 
   const _logout = () => {
     dispatch(logout());
@@ -52,13 +80,11 @@ const App = () => {
     }
   }
 
-  console.log(`total: ${totalQuantity}`);
-
   getQuantityOfItems();
 
   return (
     <div>
-      <h1>Acme Shopping</h1>
+      <h1>King of Jerseys</h1>
       {auth.id ? (
         <div
           style={{
@@ -92,7 +118,26 @@ const App = () => {
           </Button>
         </div>
       ) : (
-        ""
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignContent: "space-evenly",
+            alignItems: "baseline",
+            gap: ".5rem",
+            margin: "1%",
+          }}
+        >
+          <Link to="/cart">
+            <FontAwesomeIcon
+              style={{ color: "#30b03f" }}
+              icon={faCartShopping}
+              size="xl"
+            />
+          </Link>
+          {totalQuantity}
+        </div>
       )}
       {auth.id ? (
         <nav>
@@ -105,7 +150,6 @@ const App = () => {
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
           <Link to="/products">Products</Link>
-          <Link to="/cart">Cart</Link>
         </nav>
       )}
       <Routes>
