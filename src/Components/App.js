@@ -20,11 +20,10 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-// pushing to handle merge conflicts
+console.log('hello');
 
 const App = () => {
   const { auth, cart } = useSelector((state) => state);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const prevAuth = useRef({});
