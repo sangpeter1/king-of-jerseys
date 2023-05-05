@@ -20,8 +20,6 @@ const Cart = () => {
     dispatch(checkout());
   };
 
-  console.log(cart.lineItems);
-
   return (
     <div className="cart-container">
       <h1 className="cart-title">Cart</h1>
