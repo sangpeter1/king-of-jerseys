@@ -20,6 +20,8 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
+// pushing to handle merge conflicts
+
 const App = () => {
   const { auth, cart } = useSelector((state) => state); // get cart state from the store
   const dispatch = useDispatch();
