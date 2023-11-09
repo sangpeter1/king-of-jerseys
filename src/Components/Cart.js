@@ -51,6 +51,15 @@ const Cart = () => {
           >
             Remove All
           </Button>
+
+          <Button
+            style={{ margin: ".1rem" }}
+            size="sm"
+            variant="danger"
+            onClick={() => window.localStorage.removeItem("cart")}
+          >
+            Clear Cart
+          </Button>
         </div>
       ))}
       <div className="cart-buttons">

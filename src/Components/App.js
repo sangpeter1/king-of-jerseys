@@ -51,7 +51,7 @@ const App = () => {
 
   useEffect(() => {
     prevAuth.current = auth;
-  });
+  }, [auth]);
 
   let totalQuantity = 0;
 

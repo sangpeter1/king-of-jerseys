@@ -66,6 +66,7 @@ const localCartToServer = async () => {
 export const fetchCart = () => {
   return async (dispatch, getState) => {
     if (getState().auth.id) {
+      console.log(`authID ${getState().auth.id}`)
       await localCartToServer();
       const token = window.localStorage.getItem("token");
       const response = await axios.get("/api/orders/cart", {
