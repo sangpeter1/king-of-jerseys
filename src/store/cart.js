@@ -147,18 +147,38 @@ export const addProductToCart = (product) => {
 };
 
 export const checkout = () => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem("token");
-    const { data: order } = await axios.post(
-      "/api/orders/checkout",
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
+  return async (dispatch, getState) => {
+    console.log(getState().auth.id)
+    if (getState().auth.id) {
+      const token = window.localStorage.getItem("token");
+      const { data: order } = await axios.post(
+        "/api/orders/checkout",
+        {},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      dispatch(_checkout(order));
+    } else {
+      const order = localCart();
+      await axios.post(
+        "/api/orders/checkout",
+        { order }
+      )
+    }
+
+    const res = await fetch("api/orders/checkout", {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json'
       }
-    );
-    dispatch(_checkout(order));
+    })
+    const body = await res.json()
+    window.location.href = body.url
+  
+
     alert("Checkout successful!");
     dispatch({ type: "CLEAR_CART" }); // clear the cart after checkout
   };

@@ -1,5 +1,5 @@
 const conn = require("./conn");
-const { BOOLEAN, TEXT, STRING, UUID, UUIDV4 } = conn.Sequelize;
+const { BOOLEAN, INTEGER, TEXT, STRING, UUID, UUIDV4 } = conn.Sequelize;
 
 const Product = conn.define("product", {
   id: {
@@ -20,6 +20,12 @@ const Product = conn.define("product", {
   image: {
     type: TEXT,
   },
+
+  price: {
+    type: INTEGER,
+    allowNull: false,
+    defaultValue: 4000,
+  }
 });
 
 module.exports = Product;
